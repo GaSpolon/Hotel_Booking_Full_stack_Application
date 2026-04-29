@@ -1,0 +1,30 @@
+services:
+  # 1. Contêiner do Banco de Dados
+  database:
+    build: 
+      context: ./Database
+    container_name: database
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: lakeside_hotel
+    ports:
+      - "3306:3306"
+  api-backend:
+    build: 
+      context: "./Backend [Springboot]/lakeside_hotel"
+    container_name: api-backend
+    environment:
+      DB_HOST: database
+      DB_PASSWORD: root
+    ports:
+      - "9091:9091"
+    depends_on:
+      - database
+  frontend:
+    build: 
+      context: "./Frontend_React_JS/lakeside_hotel"
+    container_name: frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - api-backend
