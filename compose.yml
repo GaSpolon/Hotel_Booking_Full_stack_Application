@@ -1,5 +1,4 @@
 services:
-  # 1. Contêiner do Banco de Dados
   database:
     build: 
       context: ./Database
