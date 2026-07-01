@@ -1,0 +1,17 @@
+replicaCount: 1
+
+database:
+  image: lakeside-db
+  tag: latest
+  rootPassword: root
+  dbName: lakeside_hotel
+
+backend:
+  image: lakeside-backend
+  tag: latest
+  port: 9091
+
+frontend:
+  image: lakeside-frontend
+  tag: latest
+  port: 80

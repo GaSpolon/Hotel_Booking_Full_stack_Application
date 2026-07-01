@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "",
+  baseURL: "/api/v1",
 });
 
 // This function add new room type from database
