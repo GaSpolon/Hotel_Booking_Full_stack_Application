@@ -26,6 +26,10 @@ spec:
                 secretKeyRef:
                   name: {{ .Release.Name }}-db-secret
                   key: mysql-root-password
+            - name: SPRING_SERVLET_MULTIPART_MAX_FILE_SIZE
+              value: "50MB"
+            - name: SPRING_SERVLET_MULTIPART_MAX_REQUEST_SIZE
+              value: "50MB"
           livenessProbe:
             tcpSocket:
               port: {{ .Values.backend.port }}
