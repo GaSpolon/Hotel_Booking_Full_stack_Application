@@ -26,6 +26,9 @@ spec:
                   key: mysql-root-password
             - name: MYSQL_DATABASE
               value: {{ .Values.database.dbName }}
+          volumeMounts:
+            - name: db-storage
+              mountPath: /var/lib/mysql
           livenessProbe:
             exec:
               command: ["sh", "-c", "mysqladmin ping -h 127.0.0.1 -uroot -p$MYSQL_ROOT_PASSWORD"]
@@ -36,6 +39,10 @@ spec:
               command: ["sh", "-c", "mysqladmin ping -h 127.0.0.1 -uroot -p$MYSQL_ROOT_PASSWORD"]
             initialDelaySeconds: 20
             periodSeconds: 10
+      volumes:
+        - name: db-storage
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-db-pvc
 ---
 apiVersion: v1
 kind: Service
